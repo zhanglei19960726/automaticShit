@@ -1,4 +1,4 @@
-package main
+package automaticshit
 
 import "time"
 

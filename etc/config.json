@@ -1,5 +1,5 @@
 {
     "people": ["test1","test2"],
-    "per_user_num": 1,
+    "per_user_num": 5,
     "num":1
 }

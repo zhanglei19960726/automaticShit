@@ -1,10 +1,10 @@
-package main
+package automaticshit
 
-// automaticShit 自动排班
+// AutomaticShit 自动排班
 // people 人员
 // perUserNum 每天排班的人数
 // num 从第几个开始排
-func automaticShit(people []string, perUserNum, num int, days int) (shit [][]string) {
+func AutomaticShit(people []string, perUserNum, num int, days int) (shit [][]string) {
 	totalNum := days * perUserNum
 	tmp := make([]string, totalNum)
 	shit = make([][]string, 0, days)
