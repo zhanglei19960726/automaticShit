@@ -1,10 +1,10 @@
 module automaticshit
 
 require (
+	github.com/fsnotify/fsnotify v1.5.1
 	github.com/lestrrat-go/file-rotatelogs v2.2.0+incompatible
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
 	github.com/sirupsen/logrus v1.8.1
-	github.com/fsnotify/fsnotify v1.5.1
 )
 
 require (

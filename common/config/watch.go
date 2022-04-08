@@ -15,10 +15,10 @@ func watch(ctx context.IContext, watcher *fsnotify.Watcher) {
 				return
 			}
 			ctx.Debug("cfg watch event", event)
-			if event.Op != fsnotify.Write {
+			if event.Op&fsnotify.Write == 0 {
 				break
 			}
-			if err := readConfig(event.Name); err != nil {
+			if err := LoadConfig(event.Name); err != nil {
 				ctx.Error("readConfig error", err.Error())
 				break
 			}
@@ -34,9 +34,6 @@ func watch(ctx context.IContext, watcher *fsnotify.Watcher) {
 
 // cfgWatch 开始配置文件监听
 func CfgWatch(ctx context.IContext, path string) error {
-	if err := readConfig(path); err != nil {
-		return err
-	}
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		return err

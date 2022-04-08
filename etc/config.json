@@ -1,5 +1,11 @@
 {
-    "people": ["test1","test2"],
+    "people": ["test1","test2","test3","test4","test5"],
     "per_user_num": 5,
-    "num":1
+    "num":1,
+    "log":{
+        "log_path":"./",
+        "log_level":"debug",
+        "log_save":8
+    },
+    "data_save_path":"./data"
 }
