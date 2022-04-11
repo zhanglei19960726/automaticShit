@@ -22,7 +22,9 @@ func watch(ctx context.IContext, watcher *fsnotify.Watcher) {
 				ctx.Error("readConfig error", err.Error())
 				break
 			}
-			ctx.Debug("cfg is ", GetConfig())
+			for _, v := range reloadCfgFunc {
+				v(ctx)
+			}
 		case err, ok := <-watcher.Errors:
 			if !ok {
 				return
