@@ -9,6 +9,6 @@
     },
     "data_save_path":"./data",
     "cron_config":{
-        "space":"0 */1 * * * *"
+        "space":"*/1 * * * * *"
     }
 }

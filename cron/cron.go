@@ -1,8 +1,10 @@
 package cron
 
 import (
+	"automaticshit/automaticshit"
 	"automaticshit/common/config"
 	"automaticshit/common/context"
+	"automaticshit/notic"
 
 	cron "github.com/robfig/cron/v3"
 )
@@ -14,11 +16,15 @@ type Cron struct {
 	exeFunc func()
 }
 
-func NewCron(ctx context.IContext, spec string, f func()) (c *Cron, err error) {
+func NewCron(ctx context.IContext, spec string, notic notic.INotic, autoMatci automaticshit.IAutoMaticShit) (c *Cron, err error) {
 	c = &Cron{
-		spec:    spec,
-		cro:     cron.New(cron.WithLogger(newCronLog(ctx)), cron.WithSeconds()),
-		exeFunc: f,
+		spec: spec,
+		cro:  cron.New(cron.WithLogger(newCronLog(ctx)), cron.WithSeconds()),
+		exeFunc: func() {
+			if err := notic.NoticShit(ctx, autoMatci); err != nil {
+				ctx.Error("NotciShit error", err.Error())
+			}
+		},
 	}
 	c.entryID, err = c.cro.AddFunc(spec, c.exeFunc)
 	if err != nil {

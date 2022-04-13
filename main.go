@@ -1,12 +1,13 @@
 package main
 
 import (
+	"automaticshit/automaticshit"
 	"automaticshit/common/config"
 	"automaticshit/common/context"
 	"automaticshit/common/xlog"
 	"automaticshit/cron"
+	"automaticshit/notic"
 	"flag"
-	"fmt"
 )
 
 func main() {
@@ -20,9 +21,12 @@ func main() {
 	ctx := context.NewContext(logger)
 	config.CfgWatch(ctx, *cfgs)
 	ch := make(chan int)
-	cro, err := cron.NewCron(ctx, cfg.CronConfig.Space, func() {
-		fmt.Println("zhanglei")
-	})
+	autoMgr, err := automaticshit.NewAutomaticShitMgr(ctx, cfg.DataSavePath)
+	if err != nil {
+		panic(err)
+	}
+	notic := notic.NewNotic()
+	cro, err := cron.NewCron(ctx, cfg.CronConfig.Space, notic, autoMgr)
 	if err != nil {
 		panic(err)
 	}
